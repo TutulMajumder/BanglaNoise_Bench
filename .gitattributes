@@ -1,0 +1,8 @@
+# Keep LF line endings everywhere. The suite runs on Kaggle (Linux) and the
+# report scripts write files with newline="\n"; CRLF checkouts on Windows
+# (core.autocrlf=true) would otherwise create spurious diffs.
+* text=auto eol=lf
+
+# Bangla-emitting artefacts and data are binary as far as diffing goes.
+*.html -text
+*.ipynb -text

@@ -1,0 +1,9 @@
+# Phase 2 (data preparation) -- NOT part of the released artefact.
+# Install on top of requirements.txt:  pip install -r requirements-phase2.txt
+#
+# data/prepare.py and the two Phase 2 report scripts use pandas for CSV I/O.
+# The noise suite itself (noisebench/) still depends only on regex.
+
+-r requirements.txt
+
+pandas>=2.0        # CSV read/write; any 2.x is fine (Kaggle ships 2.2.x)

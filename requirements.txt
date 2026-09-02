@@ -1,0 +1,33 @@
+# noisebench runtime + test dependencies (Phase 1)
+#
+# Keep this list minimal. This module ships with the paper as the released
+# artefact, so every dependency is a reproducibility liability.
+
+# --- runtime (imported by noisebench/) --------------------------------------
+
+# Grapheme-cluster segmentation (\X). Used to treat each extended grapheme
+# cluster as one "character" (METHODOLOGY M1.1) so N2/N4/N6/N7 never split a
+# cluster into an invalid Unicode sequence. Pinned exactly for reproducibility.
+regex==2024.11.6
+
+# THE BanglaBERT normalizer -- csebuetnlp/normalizer (import name `normalizer`,
+# `from normalizer import normalize`). This is the exact package BanglaBERT's
+# own preprocessing pipeline uses; it is NOT the same package as
+# `bnunicodenormalizer` (a different BUET project, used for OCR/ASR, not
+# BanglaBERT). validate.py's normalizer-survival check (Phase 1) validates
+# THIS normalizer, and Phase 3's `--normalizer on` flag must call the exact
+# same one (noisebench.validate.normalize_banglabert) -- otherwise the
+# survival guarantee measured in Phase 1 does not transfer to Phase 3's
+# reported numbers. Not on PyPI; pinned to a commit (not just test-only, since
+# it affects reported results). Pulls `emoji` and `ftfy` transitively -- and
+# the normalizer's own metadata at commit d405944 DOES pin them exactly:
+# `emoji==1.4.2`, `ftfy==6.0.3` (verified 2026-09-02 via
+# importlib.metadata.distribution('normalizer').requires). Both affect reported
+# numbers (`ftfy` inside normalize(); `emoji` via validate.emoji_range_coverage,
+# the M0 Q9 coverage measurement), so still confirm the resolved versions on
+# Kaggle -- see README "Resolved dependency versions (reproducibility)".
+normalizer @ git+https://github.com/csebuetnlp/normalizer@d405944dde5ceeacb7c2fd3245ae2a9dea5f35c9
+
+# --- test only ----------------------------------------------------------
+
+pytest>=7.4
