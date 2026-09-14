@@ -1,0 +1,4 @@
+dataset,cap_grapheme_clusters,n_texts,pct_texts_over_cap
+sentnob,300,14353,0.000
+bd_shs,300,50127,0.964
+banfakenews,300,8489,97.397

@@ -1,0 +1,9 @@
+{
+  "limited": false,
+  "limit": null,
+  "n_rows_processed": {
+    "sentnob": 15728,
+    "bd_shs": 50281,
+    "banfakenews": 8501
+  }
+}

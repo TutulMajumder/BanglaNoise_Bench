@@ -1,0 +1,5 @@
+dataset,emoji_lib_version,n_occurrences,coverage_any,coverage_full,n_false_positive_codepoints
+sentnob,1.4.2,14,1.0000,1.0000,0
+bd_shs,1.4.2,2,1.0000,1.0000,0
+banfakenews,1.4.2,1,1.0000,1.0000,0
+ALL,1.4.2,3,1.0000,1.0000,0

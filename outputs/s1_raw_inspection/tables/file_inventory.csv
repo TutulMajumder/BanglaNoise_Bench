@@ -1,0 +1,9 @@
+dataset,file,sha256,n_rows,n_rows_inspected,n_columns,columns,utf8_decode_failures
+sentnob,sentnob\train.csv,2755f05aaa3198b7d7e00241974362a770a4467267048a3956b18ef95116377e,12575,12575,2,Data|Label,0
+sentnob,sentnob\val.csv,0b19347a83d5c56a6cff70561291bbe902b743f4a76d8b02eb625cd6880bb3ca,1567,1567,2,Data|Label,0
+sentnob,sentnob\test.csv,46f6f4c2812ea204d08f0c9e77b0b48a4a3a93aa7905e37f65e45ac259507ed6,1586,1586,2,Data|Label,0
+bd_shs,bd_shs\train.csv,116c9e9eb7432dff1d50f8cb5cb64a02cf9b8e63caac22fba53d978b1c345ec5,40224,40224,4,sentence|target|type|hate speech,0
+bd_shs,bd_shs\val.csv,67995e80777818a1722b77cd577951f8ffb44d0503b7c659eb7a364b4c165bb4,5028,5028,4,sentence|target|type|hate speech,0
+bd_shs,bd_shs\test.csv,4543a005555ee466a741a4d4d427f1d5b813237366011ef4059700a35115ab5f,5029,5029,4,sentence|target|type|hate speech,0
+banfakenews,banfakenews\LabeledAuthentic-7K.csv,9fc5f573db7f1aa4ea42b200330512f51d18d5402d251eb9c052e1b31e29bd8d,7202,7202,9,articleID|domain|date|category|source|relation|headline|content|label,0
+banfakenews,banfakenews\LabeledFake-1K.csv,b7badbb90f042422943a4263f3e0538eddd2126a6da7bb55d17b23f23025be93,1299,1299,10,articleID|domain|date|category|source|relation|headline|content|label|F-type,0

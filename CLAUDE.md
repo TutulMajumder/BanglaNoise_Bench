@@ -6,9 +6,9 @@ Optimise for correct, simple and testable. Never for clever.
 
 ## Source of truth
 
-`METHODOLOGY.md` is the implementation spec (task-ordered M0–M7).
-`Topic4_FULL_PAPER_PLAN.md` defines the experiment design and
-`Figure_Plan_Evaluation.md` defines the figures. **Where METHODOLOGY.md
+`docs/METHODOLOGY.md` is the implementation spec (task-ordered M0–M7).
+`docs/Topic4_FULL_PAPER_PLAN.md` defines the experiment design and
+`docs/Figure_Plan_Evaluation.md` defines the figures. **Where METHODOLOGY.md
 disagrees with the plan on an implementation detail, METHODOLOGY.md wins; the
 plan wins for scope.** If a task instruction contradicts all of those, stop and
 ask — do not silently pick one.
@@ -65,8 +65,26 @@ ask — do not silently pick one.
    (renders in the VS Code preview) plus an HTML variant with
    `<meta charset="utf-8">` and a Bangla font stack
    (`"Noto Sans Bengali", "Nirmala UI", sans-serif`).
-
-## Never do these
+9. **Never execute long-running analysis.** Write the script, verify it imports
+   and runs on a tiny smoke sample (≤20 rows, printed), then hand the exact
+   command to the human to run. This followed a real incident: an
+   unbounded real-corpus run hung 17 hours with no output (M2.4's CER
+   measurement — pure-Python O(n²) edit distance on article-length text).
+   Every script must: print progress to stderr as it goes (dataset, stage,
+   elapsed seconds) so a stall is visible within a minute; accept `--limit N`
+   for a fast smoke run; and be resumable — skip any output that already
+   exists unless `--force` is passed.
+10. **This repository will be published.** No corpus text, no credentials, no
+    absolute local paths, no dead code, no orphaned scripts in the tracked
+    tree. Every file must be reachable from `pipeline/run_all.py` or
+    documented in a README as to why it exists standalone (e.g. the Phase 1
+    noise-suite validation scripts, which predate the Phase 2 pipeline).
+    `outputs/` is tracked and paper-facing: BD-SHS contains obscene/abusive
+    text by design (that's the corpus) and it stays in `data/`, but not one
+    line of it may appear in `outputs/` or a figure. Any script that writes
+    under `outputs/` must count codepoints in U+0980–U+09FF in what it wrote
+    and report the total — it should be zero outside deliberate glyph labels
+    (homophone-set names, matra pairs), never verbatim corpus text.
 
 - Never invent Bangla words, spellings or orthographic rules. Uncertain linguistic
   content goes in a `CANDIDATE_` constant with a `# TODO(verify):` comment for me.

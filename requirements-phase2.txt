@@ -3,7 +3,15 @@
 #
 # data/prepare.py and the two Phase 2 report scripts use pandas for CSV I/O.
 # The noise suite itself (noisebench/) still depends only on regex.
+#
+# rapidfuzz is a scripts/m2_4_measurements.py-only dependency: the pure-Python
+# noisebench.validate.levenshtein is O(n^2) and hangs on article-length real
+# text (BanFakeNews averages ~1,100 grapheme clusters vs ~60 in the Phase 1
+# fixture). Verified to agree EXACTLY (0 mismatches) with the pure-Python
+# implementation on the full Phase 1 9x5 CER table before use -- see
+# PHASE2_STATUS.md. noisebench/ itself is untouched and still stdlib+regex only.
 
 -r requirements.txt
 
-pandas>=2.0        # CSV read/write; any 2.x is fine (Kaggle ships 2.2.x)
+pandas>=2.0         # CSV read/write; any 2.x is fine (Kaggle ships 2.2.x)
+rapidfuzz==3.14.6   # C++-backed Levenshtein for the M2.4 real-corpus CER measurement only

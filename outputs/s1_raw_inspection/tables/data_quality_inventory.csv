@@ -1,0 +1,4 @@
+dataset,n_rows,n_unique,n_duplicate_rows,n_empty_or_whitespace,n_zero_bangla,n_replacement_char,n_emoji_bearing
+sentnob,15728,14869,859,0,6,0,266
+bd_shs,50281,50277,4,0,4,2548,288
+banfakenews,8501,8501,0,0,2,0,18

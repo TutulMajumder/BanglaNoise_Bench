@@ -95,6 +95,8 @@ Ten types, five severity levels each. Severity = **fraction of eligible units pe
 
 **N10 is handled differently** — it is not a severity-graded corruption but a three-way preprocessing condition, run as its own experiment (motivated by Tisha et al.'s ~12% emoji finding).
 
+**N10 status, decided 2026-09-15 (not contingent on falling behind — see §11 item 3 and PHASE2_STATUS.md):** N10 stays defined here and in METHODOLOGY.md — it is a real phenomenon and the paper says so — but it is excluded from the R2 grid (R2 already specifies 9 noise types in §7, matching what the CER tables report; this note makes that agreement explicit rather than incidental) and R5 (the emoji training arm) is dropped entirely. Reason: s1 raw inspection counts 266 emoji-bearing texts in SentNoB (1.7%) and 288 in BD-SHS (0.57%); on the test splits alone that is roughly 27 and 57 items. That is not enough to support an emoji-noise evaluation. The justification for §VI is a limitations statement, not a silent omission: *available Bangla classification corpora carry too little emoji content to support an emoji-noise evaluation — itself a finding about the state of Bangla datasets, not a gap in this work.*
+
 ### Implementation requirements (non-negotiable)
 - **Deterministic and seeded.** `perturb(text, noise_type, severity, seed)` must be reproducible bit-for-bit.
 - **Unit-tested monotonicity:** mean character error rate (CER) vs original must increase strictly with severity for every noise type. Write this test on day 2.
@@ -110,9 +112,9 @@ Ten types, five severity levels each. Severity = **fraction of eligible units pe
 |---|---|---|---|
 | **BD-SHS** | Hate speech (binary) | github.com/naurosromim/hate-speech-dataset-for-Bengali-social-media ; Kaggle `naurosromim/bdshs` | Confirm 50,200+; record class balance |
 | **SentNoB** | Sentiment (3-class: 0=neutral, 1=positive, 2=negative) | github.com/KhondokerIslam/SentNoB ; Kaggle `cryptexcode/sentnob-sentiment-analysis-in-noisy-bangla-texts` | **Exact split sizes are not documented online — record Train/Val/Test counts yourself and report them.** Check licence on the Kaggle page |
-| **BanFakeNews** | Fake news (binary) | github.com/Rowan1697/FakeNews ; Kaggle `cryptexcode/banfakenews` | 48K authentic / 1K fake — **use the labelled balanced subsets (7K auth / 1K fake) for main runs**, full set as secondary |
+| **BanFakeNews** | Fake news (binary) | github.com/Rowan1697/FakeNews ; Kaggle `cryptexcode/banfakenews` | 48K authentic / 1K fake — **use the labelled balanced subsets (7K auth / 1K fake) for main runs.** The full 48K/1K pair (`banfakenews_full`) was implemented as a secondary condition, then **cut entirely 2026-09-15**: it supported no claim in the paper and consumed 72% of s1's real-scale raw-inspection runtime (755s of 1042s). See PHASE2_STATUS.md. Three datasets remain: SentNoB, BD-SHS, BanFakeNews. |
 
-**Also compute on day 1 and put in Table II:** emoji rate per dataset (fraction of samples containing ≥1 emoji), mean token length, and duplicate rate. The emoji rate determines which task the N10 experiment runs on — pick the highest.
+**Also compute on day 1 and put in Table II:** emoji rate per dataset (fraction of samples containing ≥1 emoji), mean token length, and duplicate rate. (The line that followed here — "the emoji rate determines which task the N10 experiment runs on" — no longer applies: N10 is not evaluated, see §4's N10 status note and §11 item 3.)
 
 ---
 
@@ -136,15 +138,15 @@ Ten types, five severity levels each. Severity = **fraction of eligible units pe
 | ID | Experiment | Runs | Cost |
 |---|---|---|---|
 | **R1** | Clean baselines | 4 transformers × 3 tasks × 3 seeds = **36 fine-tunes** + classical (CPU) | ~10–14 GPU-h |
-| **R2** | Noise grid (inference only) | 5 models × 3 tasks × 9 noise types × 5 severities × 3 seeds ≈ 2,000 eval passes | ~4–6 GPU-h |
+| **R2** | Noise grid (inference only) | 5 models × 3 tasks × 9 noise types × 5 severities × 3 seeds ≈ 2,000 eval passes — **N10 deliberately excluded** (see §4 N10 status note); this row already matched that before the note existed, now made explicit | ~4–6 GPU-h |
 | **R3** | Noise-type ranking | Derived from R2 — no new runs | 0 |
 | **R4a** | Noise-augmented training (matched) | 2 best models × 3 tasks × 3 seeds = **18 fine-tunes** | ~5 GPU-h |
 | **R4b** | Noise-augmented (mismatched: train on N1–N4, test on N5–N8) | Reuses R4a checkpoints — inference only | ~1 GPU-h |
-| **R5** | Emoji condition (N10) | 3 conditions × 2 models × 1 task × 3 seeds = **18 fine-tunes** | ~4 GPU-h |
+| ~~**R5**~~ | ~~Emoji condition (N10)~~ **CUT 2026-09-15** | ~~3 conditions × 2 models × 1 task × 3 seeds = 18 fine-tunes~~ — dropped, not deferred: too few emoji-bearing test items (§4 N10 status note) to measure anything, regardless of GPU budget | ~~~4 GPU-h~~ **0 (freed)** |
 | **R6** | Normalizer ON/OFF | Reuses R2 checkpoints — inference only, doubles R2 eval | ~4 GPU-h |
 | **R7** | Synthetic vs natural validation | Derived — rank correlation between R2 rankings and clean-SentNoB rankings | 0 |
 
-**Total ≈ 30–35 GPU-hours.** Above my earlier 10–15h estimate because of the normalizer condition and the emoji arm. Still inside Kaggle's 30h/week quota across two weeks. If you must cut, drop R6 to a single task.
+**Total ≈ 26–31 GPU-hours** (was ≈ 30–35; R5's ~4 GPU-h freed by the 2026-09-15 cut above, not by falling behind). Still inside Kaggle's 30h/week quota across two weeks. If you must cut further, drop R6 to a single task (§11 item 1).
 
 ---
 
@@ -257,11 +259,13 @@ bangla-noisebench/
 
 1. **R6 normalizer ON/OFF** → reduce to one task instead of three
 2. **BanFakeNews** → drop the task entirely (least noisy domain, worst imbalance); paper survives on two tasks
-3. **R5 emoji arm** → report as future work
+3. ~~**R5 emoji arm** → report as future work~~ **Already decided, 2026-09-15 — not contingent on falling behind.** R5 is dropped for a data-sufficiency reason, not a time-pressure one: s1 raw inspection counts only 266 emoji-bearing texts in SentNoB (1.7%) and 288 in BD-SHS (0.57%) — roughly 27 and 57 on the test splits alone. Report this as a limitations-section finding about Bangla dataset emoji content, not "future work." N10 stays in the taxonomy and METHODOLOGY.md; it is excluded from the R2 grid (§4, §7). ~4 GPU-h freed.
 4. **mBERT** → drop one multilingual model
 5. **R4b mismatched augmentation** → drop, but only last; it is what makes R4 non-trivial
 
 **Never cut:** the noise suite itself, R1, R2, or R7 (synthetic-vs-natural validation). Those four are the paper.
+
+Also cut, separately from this contingency list (not a "falling behind" cut — a scope decision, 2026-09-15): the BanFakeNews full 48K/1K secondary/imbalanced condition (`banfakenews_full`), implemented then removed — supported no paper claim and cost 72% of s1's real-scale runtime. See §5 and PHASE2_STATUS.md. This does not touch item 2 above, which is about dropping the *primary* balanced BanFakeNews task, a different and still-only-contingent cut.
 
 ---
 

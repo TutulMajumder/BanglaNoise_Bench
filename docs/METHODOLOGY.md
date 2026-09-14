@@ -170,16 +170,16 @@ Truncation to 128 tokens happens at model tokenization, **not** here.
 ## M2.2 Splits
 
 - **SentNoB** ships Train/Val/Test — **use as given.**
-- **BD-SHS** and **BanFakeNews**: seeded stratified **70/10/20**, `split_seed=42`. Commit split files to `data/splits/`.
-- **BanFakeNews** main runs use the labelled balanced subsets (≈7K authentic / 1K fake); the full 48K/1K set is a secondary condition.
+- **BD-SHS** and **BanFakeNews**: seeded stratified **70/10/20**, `split_seed=42`. Row ids, the seed, and source-file SHA-256 are committed in `data/final/<dataset>/manifest.json` (text itself stays git-ignored).
+- **BanFakeNews** main runs use the labelled balanced subsets (≈7K authentic / 1K fake). The full 48K/1K set (`banfakenews_full`) was implemented as a secondary condition, then **cut entirely 2026-09-15** — it supported no paper claim and cost 72% of s1's real-scale runtime. Three datasets remain: SentNoB, BD-SHS, BanFakeNews. See `PHASE2_STATUS.md`.
 
 ## M2.3 Statistics for Table II
 
-Per dataset: n after cleaning, class distribution, mean/median cluster length, **emoji rate**, duplicates removed, short texts removed. The emoji rate decides which task hosts the N10 experiment (pick the highest).
+Per dataset: n after cleaning, class distribution, mean/median cluster length, **emoji rate**, duplicates removed, short texts removed. (Emoji rate no longer selects an N10 host task — R5 is cut, 2026-09-15; see M5.3. Still reported, since it's the evidence for that cut.)
 
 ## M2.4 Real-corpus regeneration and firing counts
 
-1. **Regenerate the 9×5 CER table on real corpus samples.** That version goes in the paper; the synthetic one was a development check. Report both.
+1. **Regenerate the 9×5 CER table on real corpus samples.** That version goes in the paper; the synthetic one was a development check. Report both. **Each sampled text is capped to its first 300 grapheme clusters before perturbing for this measurement only** (`scripts/m2_4_measurements.py::CER_TRUNCATE_CLUSTERS`) — `validate.levenshtein` is pure-Python O(n²), and BanFakeNews articles average ~1,100 clusters (some far more) versus ~60 for the Phase 1 fixture, which made the full-length real-corpus table unrunnable (a real run hung 17h). This measurement checks that the severity-ratio structure survives on real text, not a document-level CER claim; CER is normalized by reference length and the M1.3 count rule is per-eligible-unit, so the cap does not bias the ratios. N5/emoji/normalizer measurements below are unaffected — they see full-length text.
 2. **N5 per-set firing counts:** `n_eligible` and `n_applied` per `HOMOPHONE_SET` per dataset. `n_applied` sums directly off `PerturbStats.submodes`; `n_eligible` needs a grouping pass over `_homophone_occurrences`. Any set eligible near-zero times on real text is **dropped with evidence** and noted in Limitations — not guessed at. `ই/ঈ` and `উ/ঊ` are the two under review.
 3. **Emoji coverage:** fraction of emoji occurrences caught by `EMOJI_CODEPOINT_RANGES` versus the `emoji` library, measured in the validation layer only (`validate.emoji_range_coverage`). The reference is `emoji` 1.4.2 ≈ Unicode 13 (2021); report the number as an upper bound against that era, not current Unicode (see M0.2 Q9).
 4. **Normalizer touch_rate on real corpora** — see M5.4.
@@ -227,7 +227,7 @@ normalizer @ git+https://github.com/csebuetnlp/normalizer@d405944dde5ceeacb7c2fd
 
 ## M5.1 Robustness (R2)
 
-Perturbation applied to **test sets only**. Every (model × task × seed × noise_type × severity × normalizer) appended to `results/results.csv`. Inference only. Resumable — skip rows already present.
+Perturbation applied to **test sets only**. Every (model × task × seed × noise_type × severity × normalizer) appended to `results/results.csv`. Inference only. Resumable — skip rows already present. `noise_type` ranges over the 9 severity-graded types (N1–N9) only — **N10 is deliberately excluded from this grid** (decided 2026-09-15; see M5.3 and `Topic4_FULL_PAPER_PLAN.md` §4/§7/§11). This matches what the CER tables already reported, so code and tables now agree explicitly rather than incidentally.
 
 ## M5.2 Augmentation (R4)
 
@@ -248,9 +248,13 @@ Two models, three tasks, three seeds. Matched-vs-mismatched is what makes "augme
 
 **Apply the M1.3 per-item seeding rule here** — severity and noise type are drawn per training example, which is exactly the situation that produced the N7 seed-correlation bug.
 
-## M5.3 Emoji (R5)
+## M5.3 Emoji (R5) — **CUT, 2026-09-15**
 
 Three conditions — `keep` / `remove` / `replace_with_text` — applied identically at train and test time, on the highest-emoji-rate task. Bangla descriptions hand-mapped for the top ~50 emoji by corpus frequency; removal as fallback. Report mapping coverage.
+
+**This run is cut, not deferred.** s1 raw inspection: 266 emoji-bearing texts in SentNoB (1.7%), 288 in BD-SHS (0.57%) — roughly 27 and 57 items on the test splits alone. Not enough to measure anything, independent of GPU budget (contrast M5.4, which is conditional on a *measured* touch_rate; this is conditional on nothing — the corpora simply don't carry enough emoji). The spec above stays for the record (N10 itself is a real, defined phenomenon — see M0/M1.4), but no R5 run is scheduled. Report as a limitations finding:
+
+> *"Available Bangla classification corpora carry too little emoji content to support an emoji-noise evaluation — itself a finding about the state of Bangla datasets."*
 
 ## M5.4 Normalizer ON/OFF (R6) — **conditional**
 

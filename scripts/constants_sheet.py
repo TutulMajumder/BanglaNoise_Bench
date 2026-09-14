@@ -34,8 +34,8 @@ if _ROOT not in sys.path:
 
 from noisebench import bangla_maps as bm  # noqa: E402
 
-_DEFAULT_MD = os.path.join(_ROOT, "results", "constants_sheet.md")
-_DEFAULT_HTML = os.path.join(_ROOT, "results", "constants_sheet.html")
+_DEFAULT_MD = os.path.join(_ROOT, "outputs", "s0_noise_suite", "constants_sheet.md")
+_DEFAULT_HTML = os.path.join(_ROOT, "outputs", "s0_noise_suite", "constants_sheet.html")
 
 
 # ---------------------------------------------------------------------------

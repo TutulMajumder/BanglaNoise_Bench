@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bangla-noisebench — rendered constants sheet</title>
+<style>
+  body { font-family: "Noto Sans Bengali", "Nirmala UI", "Kalpurush",
+         system-ui, -apple-system, "Segoe UI", sans-serif;
+         line-height: 1.5; margin: 2rem auto; max-width: 1100px; padding: 0 1rem;
+         color: #1a1a1a; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.1rem; margin-top: 1.8rem; border-bottom: 1px solid #ddd; }
+  table { border-collapse: collapse; width: 100%; margin: .5rem 0; font-size: .9rem; }
+  th, td { border: 1px solid #ccc; padding: .3rem .5rem; text-align: left;
+           vertical-align: top; }
+  th { background: #f2f2f2; }
+  td.g { font-size: 1.3rem; }
+  .pass { color: #0a7d28; font-weight: 600; }
+  .fail { color: #b00020; font-weight: 600; }
+  code { background: #f4f4f4; padding: .05rem .3rem; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<h1>bangla-noisebench — rendered constants sheet</h1>
+<p>Rendered from `noisebench/bangla_maps.py` by `scripts/constants_sheet.py`. Every `# TODO(verify):` block in that file still needs a native-speaker pass; this sheet only makes the values readable and checks their structure.</p>
+<p><strong>Structural assertions: <span class="pass">ALL PASS</span></strong></p>
+<h2>Assertions</h2>
+<table><thead><tr><th>check</th><th>result</th><th>detail</th></tr></thead><tbody>
+<tr><td>consonant pool size == 35</td><td><span class="pass">PASS</span></td><td>got 35</td></tr>
+<tr><td>independent_vowel pool size == 11</td><td><span class="pass">PASS</span></td><td>got 11</td></tr>
+<tr><td>digit pool size == 10</td><td><span class="pass">PASS</span></td><td>got 10</td></tr>
+<tr><td>IN_CLASS_POOLS match BANGLA_* inventories</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>no matra / hasanta in any IN_CLASS_POOL</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>no matra / hasanta in INSERTABLE_CHARS</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>no chandrabindu (U+0981) in INSERTABLE_CHARS</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>no digits in INSERTABLE_CHARS (removed 2026-09-01: no plausible mechanism for a digit-in-word insertion)</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>IN_CLASS_POOLS are mutually disjoint</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>every IN_CLASS_POOL has &gt;= 2 members (N3 can always pick a different char)</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>HOMOPHONE_SETS members are distinct across sets</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>every HOMOPHONE set has &gt;= 2 members</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>ি/ী and ু/ূ are present as HOMOPHONE sets (M0 Q3)</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>ই/ঈ, উ/ঊ, র/ড়/ঢ় kept (author-confirmed)</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>ব/ভ removed from HOMOPHONE_SETS (one of ten aspiration pairs; all-or-none)</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>N6_DROP_TARGETS == all matras + hasanta + chandrabindu</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>N6_ALTER_PAIRS chars are a subset of N6_DROP_TARGETS</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>N6_ALTER_PAIRS == {ি&lt;-&gt;ী, ু&lt;-&gt;ূ} only (M0 Q5 revised)</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>MATRA_TO_INDEPENDENT_VOWEL keys are all dependent vowel signs</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>MATRA_TO_INDEPENDENT_VOWEL values are all independent vowels</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>MATRA_TO_INDEPENDENT_VOWEL == {ু-&gt;উ, ূ-&gt;ঊ, ি-&gt;ই, ী-&gt;ঈ, ো-&gt;ও} only (restricted 2026-09-01)</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>HOMOPHONE_SETS_REJECTED includes the ten aspirated/unaspirated pairs</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>HOMOPHONE_SETS and HOMOPHONE_SETS_REJECTED are disjoint</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>every COMMON_CONJUNCTS entry is &lt;consonant&gt; HASANTA &lt;consonant&gt;</td><td><span class="pass">PASS</span></td><td></td></tr>
+<tr><td>every string constant is NFC-idempotent</td><td><span class="pass">PASS</span></td><td></td></tr>
+</tbody></table>
+<h2>Structural code points</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">্</td><td>U+09CD</td><td>BENGALI SIGN VIRAMA</td></tr>
+<tr><td class="g">‌</td><td>U+200C</td><td>ZERO WIDTH NON-JOINER</td></tr>
+<tr><td class="g">‍</td><td>U+200D</td><td>ZERO WIDTH JOINER</td></tr>
+<tr><td class="g">ঁ</td><td>U+0981</td><td>BENGALI SIGN CANDRABINDU</td></tr>
+</tbody></table>
+<h2>BANGLA_CONSONANTS (35)</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">ক</td><td>U+0995</td><td>BENGALI LETTER KA</td></tr>
+<tr><td class="g">খ</td><td>U+0996</td><td>BENGALI LETTER KHA</td></tr>
+<tr><td class="g">গ</td><td>U+0997</td><td>BENGALI LETTER GA</td></tr>
+<tr><td class="g">ঘ</td><td>U+0998</td><td>BENGALI LETTER GHA</td></tr>
+<tr><td class="g">ঙ</td><td>U+0999</td><td>BENGALI LETTER NGA</td></tr>
+<tr><td class="g">চ</td><td>U+099A</td><td>BENGALI LETTER CA</td></tr>
+<tr><td class="g">ছ</td><td>U+099B</td><td>BENGALI LETTER CHA</td></tr>
+<tr><td class="g">জ</td><td>U+099C</td><td>BENGALI LETTER JA</td></tr>
+<tr><td class="g">ঝ</td><td>U+099D</td><td>BENGALI LETTER JHA</td></tr>
+<tr><td class="g">ঞ</td><td>U+099E</td><td>BENGALI LETTER NYA</td></tr>
+<tr><td class="g">ট</td><td>U+099F</td><td>BENGALI LETTER TTA</td></tr>
+<tr><td class="g">ঠ</td><td>U+09A0</td><td>BENGALI LETTER TTHA</td></tr>
+<tr><td class="g">ড</td><td>U+09A1</td><td>BENGALI LETTER DDA</td></tr>
+<tr><td class="g">ঢ</td><td>U+09A2</td><td>BENGALI LETTER DDHA</td></tr>
+<tr><td class="g">ণ</td><td>U+09A3</td><td>BENGALI LETTER NNA</td></tr>
+<tr><td class="g">ত</td><td>U+09A4</td><td>BENGALI LETTER TA</td></tr>
+<tr><td class="g">থ</td><td>U+09A5</td><td>BENGALI LETTER THA</td></tr>
+<tr><td class="g">দ</td><td>U+09A6</td><td>BENGALI LETTER DA</td></tr>
+<tr><td class="g">ধ</td><td>U+09A7</td><td>BENGALI LETTER DHA</td></tr>
+<tr><td class="g">ন</td><td>U+09A8</td><td>BENGALI LETTER NA</td></tr>
+<tr><td class="g">প</td><td>U+09AA</td><td>BENGALI LETTER PA</td></tr>
+<tr><td class="g">ফ</td><td>U+09AB</td><td>BENGALI LETTER PHA</td></tr>
+<tr><td class="g">ব</td><td>U+09AC</td><td>BENGALI LETTER BA</td></tr>
+<tr><td class="g">ভ</td><td>U+09AD</td><td>BENGALI LETTER BHA</td></tr>
+<tr><td class="g">ম</td><td>U+09AE</td><td>BENGALI LETTER MA</td></tr>
+<tr><td class="g">য</td><td>U+09AF</td><td>BENGALI LETTER YA</td></tr>
+<tr><td class="g">র</td><td>U+09B0</td><td>BENGALI LETTER RA</td></tr>
+<tr><td class="g">ল</td><td>U+09B2</td><td>BENGALI LETTER LA</td></tr>
+<tr><td class="g">শ</td><td>U+09B6</td><td>BENGALI LETTER SHA</td></tr>
+<tr><td class="g">ষ</td><td>U+09B7</td><td>BENGALI LETTER SSA</td></tr>
+<tr><td class="g">স</td><td>U+09B8</td><td>BENGALI LETTER SA</td></tr>
+<tr><td class="g">হ</td><td>U+09B9</td><td>BENGALI LETTER HA</td></tr>
+<tr><td class="g">ড়</td><td>U+09A1 U+09BC</td><td>BENGALI LETTER DDA + BENGALI SIGN NUKTA</td></tr>
+<tr><td class="g">ঢ়</td><td>U+09A2 U+09BC</td><td>BENGALI LETTER DDHA + BENGALI SIGN NUKTA</td></tr>
+<tr><td class="g">য়</td><td>U+09AF U+09BC</td><td>BENGALI LETTER YA + BENGALI SIGN NUKTA</td></tr>
+</tbody></table>
+<h2>BANGLA_INDEPENDENT_VOWELS (11)</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">অ</td><td>U+0985</td><td>BENGALI LETTER A</td></tr>
+<tr><td class="g">আ</td><td>U+0986</td><td>BENGALI LETTER AA</td></tr>
+<tr><td class="g">ই</td><td>U+0987</td><td>BENGALI LETTER I</td></tr>
+<tr><td class="g">ঈ</td><td>U+0988</td><td>BENGALI LETTER II</td></tr>
+<tr><td class="g">উ</td><td>U+0989</td><td>BENGALI LETTER U</td></tr>
+<tr><td class="g">ঊ</td><td>U+098A</td><td>BENGALI LETTER UU</td></tr>
+<tr><td class="g">ঋ</td><td>U+098B</td><td>BENGALI LETTER VOCALIC R</td></tr>
+<tr><td class="g">এ</td><td>U+098F</td><td>BENGALI LETTER E</td></tr>
+<tr><td class="g">ঐ</td><td>U+0990</td><td>BENGALI LETTER AI</td></tr>
+<tr><td class="g">ও</td><td>U+0993</td><td>BENGALI LETTER O</td></tr>
+<tr><td class="g">ঔ</td><td>U+0994</td><td>BENGALI LETTER AU</td></tr>
+</tbody></table>
+<h2>MATRA_SIGNS (10)</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">া</td><td>U+09BE</td><td>BENGALI VOWEL SIGN AA</td></tr>
+<tr><td class="g">ি</td><td>U+09BF</td><td>BENGALI VOWEL SIGN I</td></tr>
+<tr><td class="g">ী</td><td>U+09C0</td><td>BENGALI VOWEL SIGN II</td></tr>
+<tr><td class="g">ু</td><td>U+09C1</td><td>BENGALI VOWEL SIGN U</td></tr>
+<tr><td class="g">ূ</td><td>U+09C2</td><td>BENGALI VOWEL SIGN UU</td></tr>
+<tr><td class="g">ৃ</td><td>U+09C3</td><td>BENGALI VOWEL SIGN VOCALIC R</td></tr>
+<tr><td class="g">ে</td><td>U+09C7</td><td>BENGALI VOWEL SIGN E</td></tr>
+<tr><td class="g">ৈ</td><td>U+09C8</td><td>BENGALI VOWEL SIGN AI</td></tr>
+<tr><td class="g">ো</td><td>U+09CB</td><td>BENGALI VOWEL SIGN O</td></tr>
+<tr><td class="g">ৌ</td><td>U+09CC</td><td>BENGALI VOWEL SIGN AU</td></tr>
+</tbody></table>
+<h2>BANGLA_SIGNS (4)</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">ঁ</td><td>U+0981</td><td>BENGALI SIGN CANDRABINDU</td></tr>
+<tr><td class="g">ং</td><td>U+0982</td><td>BENGALI SIGN ANUSVARA</td></tr>
+<tr><td class="g">ঃ</td><td>U+0983</td><td>BENGALI SIGN VISARGA</td></tr>
+<tr><td class="g">ৎ</td><td>U+09CE</td><td>BENGALI LETTER KHANDA TA</td></tr>
+</tbody></table>
+<h2>BANGLA_DIGITS (10)</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">০</td><td>U+09E6</td><td>BENGALI DIGIT ZERO</td></tr>
+<tr><td class="g">১</td><td>U+09E7</td><td>BENGALI DIGIT ONE</td></tr>
+<tr><td class="g">২</td><td>U+09E8</td><td>BENGALI DIGIT TWO</td></tr>
+<tr><td class="g">৩</td><td>U+09E9</td><td>BENGALI DIGIT THREE</td></tr>
+<tr><td class="g">৪</td><td>U+09EA</td><td>BENGALI DIGIT FOUR</td></tr>
+<tr><td class="g">৫</td><td>U+09EB</td><td>BENGALI DIGIT FIVE</td></tr>
+<tr><td class="g">৬</td><td>U+09EC</td><td>BENGALI DIGIT SIX</td></tr>
+<tr><td class="g">৭</td><td>U+09ED</td><td>BENGALI DIGIT SEVEN</td></tr>
+<tr><td class="g">৮</td><td>U+09EE</td><td>BENGALI DIGIT EIGHT</td></tr>
+<tr><td class="g">৯</td><td>U+09EF</td><td>BENGALI DIGIT NINE</td></tr>
+</tbody></table>
+<h2>INSERTABLE_CHARS — N1 pool (49)</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>class</th></tr></thead><tbody>
+<tr><td class="g">ক</td><td>U+0995</td><td>consonant</td></tr>
+<tr><td class="g">খ</td><td>U+0996</td><td>consonant</td></tr>
+<tr><td class="g">গ</td><td>U+0997</td><td>consonant</td></tr>
+<tr><td class="g">ঘ</td><td>U+0998</td><td>consonant</td></tr>
+<tr><td class="g">ঙ</td><td>U+0999</td><td>consonant</td></tr>
+<tr><td class="g">চ</td><td>U+099A</td><td>consonant</td></tr>
+<tr><td class="g">ছ</td><td>U+099B</td><td>consonant</td></tr>
+<tr><td class="g">জ</td><td>U+099C</td><td>consonant</td></tr>
+<tr><td class="g">ঝ</td><td>U+099D</td><td>consonant</td></tr>
+<tr><td class="g">ঞ</td><td>U+099E</td><td>consonant</td></tr>
+<tr><td class="g">ট</td><td>U+099F</td><td>consonant</td></tr>
+<tr><td class="g">ঠ</td><td>U+09A0</td><td>consonant</td></tr>
+<tr><td class="g">ড</td><td>U+09A1</td><td>consonant</td></tr>
+<tr><td class="g">ঢ</td><td>U+09A2</td><td>consonant</td></tr>
+<tr><td class="g">ণ</td><td>U+09A3</td><td>consonant</td></tr>
+<tr><td class="g">ত</td><td>U+09A4</td><td>consonant</td></tr>
+<tr><td class="g">থ</td><td>U+09A5</td><td>consonant</td></tr>
+<tr><td class="g">দ</td><td>U+09A6</td><td>consonant</td></tr>
+<tr><td class="g">ধ</td><td>U+09A7</td><td>consonant</td></tr>
+<tr><td class="g">ন</td><td>U+09A8</td><td>consonant</td></tr>
+<tr><td class="g">প</td><td>U+09AA</td><td>consonant</td></tr>
+<tr><td class="g">ফ</td><td>U+09AB</td><td>consonant</td></tr>
+<tr><td class="g">ব</td><td>U+09AC</td><td>consonant</td></tr>
+<tr><td class="g">ভ</td><td>U+09AD</td><td>consonant</td></tr>
+<tr><td class="g">ম</td><td>U+09AE</td><td>consonant</td></tr>
+<tr><td class="g">য</td><td>U+09AF</td><td>consonant</td></tr>
+<tr><td class="g">র</td><td>U+09B0</td><td>consonant</td></tr>
+<tr><td class="g">ল</td><td>U+09B2</td><td>consonant</td></tr>
+<tr><td class="g">শ</td><td>U+09B6</td><td>consonant</td></tr>
+<tr><td class="g">ষ</td><td>U+09B7</td><td>consonant</td></tr>
+<tr><td class="g">স</td><td>U+09B8</td><td>consonant</td></tr>
+<tr><td class="g">হ</td><td>U+09B9</td><td>consonant</td></tr>
+<tr><td class="g">ড়</td><td>U+09A1 U+09BC</td><td>consonant</td></tr>
+<tr><td class="g">ঢ়</td><td>U+09A2 U+09BC</td><td>consonant</td></tr>
+<tr><td class="g">য়</td><td>U+09AF U+09BC</td><td>consonant</td></tr>
+<tr><td class="g">অ</td><td>U+0985</td><td>independent_vowel</td></tr>
+<tr><td class="g">আ</td><td>U+0986</td><td>independent_vowel</td></tr>
+<tr><td class="g">ই</td><td>U+0987</td><td>independent_vowel</td></tr>
+<tr><td class="g">ঈ</td><td>U+0988</td><td>independent_vowel</td></tr>
+<tr><td class="g">উ</td><td>U+0989</td><td>independent_vowel</td></tr>
+<tr><td class="g">ঊ</td><td>U+098A</td><td>independent_vowel</td></tr>
+<tr><td class="g">ঋ</td><td>U+098B</td><td>independent_vowel</td></tr>
+<tr><td class="g">এ</td><td>U+098F</td><td>independent_vowel</td></tr>
+<tr><td class="g">ঐ</td><td>U+0990</td><td>independent_vowel</td></tr>
+<tr><td class="g">ও</td><td>U+0993</td><td>independent_vowel</td></tr>
+<tr><td class="g">ঔ</td><td>U+0994</td><td>independent_vowel</td></tr>
+<tr><td class="g">ং</td><td>U+0982</td><td>sign</td></tr>
+<tr><td class="g">ঃ</td><td>U+0983</td><td>sign</td></tr>
+<tr><td class="g">ৎ</td><td>U+09CE</td><td>sign</td></tr>
+</tbody></table>
+<h2>IN_CLASS_POOLS — N3 substitution pools</h2>
+<table><thead><tr><th>class</th><th>size</th><th>members</th></tr></thead><tbody>
+<tr><td>consonant</td><td>35</td><td>ক খ গ ঘ ঙ চ ছ জ ঝ ঞ ট ঠ ড ঢ ণ ত থ দ ধ ন প ফ ব ভ ম য র ল শ ষ স হ ড় ঢ় য়</td></tr>
+<tr><td>independent_vowel</td><td>11</td><td>অ আ ই ঈ উ ঊ ঋ এ ঐ ও ঔ</td></tr>
+<tr><td>digit</td><td>10</td><td>০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯</td></tr>
+</tbody></table>
+<h2>HOMOPHONE_SETS — N5 (8 sets)</h2>
+<table><thead><tr><th>#</th><th>members</th><th>code points</th><th>note</th></tr></thead><tbody>
+<tr><td>1</td><td>শ / ষ / স</td><td>U+09B6 , U+09B7 , U+09B8</td><td>letters</td></tr>
+<tr><td>2</td><td>ন / ণ</td><td>U+09A8 , U+09A3</td><td>letters</td></tr>
+<tr><td>3</td><td>ই / ঈ</td><td>U+0987 , U+0988</td><td>letters</td></tr>
+<tr><td>4</td><td>উ / ঊ</td><td>U+0989 , U+098A</td><td>letters</td></tr>
+<tr><td>5</td><td>ি / ী</td><td>U+09BF , U+09C0</td><td>dependent signs</td></tr>
+<tr><td>6</td><td>ু / ূ</td><td>U+09C1 , U+09C2</td><td>dependent signs</td></tr>
+<tr><td>7</td><td>র / ড় / ঢ়</td><td>U+09B0 , U+09A1 U+09BC , U+09A2 U+09BC</td><td>nukta letters</td></tr>
+<tr><td>8</td><td>জ / য</td><td>U+099C , U+09AF</td><td>letters</td></tr>
+</tbody></table>
+<h2>HOMOPHONE_SETS_REJECTED — considered and rejected (14)</h2>
+<table><thead><tr><th>members</th><th>code points</th></tr></thead><tbody>
+<tr><td>অ / আ</td><td>U+0985 , U+0986</td></tr>
+<tr><td>এ / ঐ</td><td>U+098F , U+0990</td></tr>
+<tr><td>ও / ঔ</td><td>U+0993 , U+0994</td></tr>
+<tr><td>ং / ঁ</td><td>U+0982 , U+0981</td></tr>
+<tr><td>ক / খ</td><td>U+0995 , U+0996</td></tr>
+<tr><td>গ / ঘ</td><td>U+0997 , U+0998</td></tr>
+<tr><td>চ / ছ</td><td>U+099A , U+099B</td></tr>
+<tr><td>জ / ঝ</td><td>U+099C , U+099D</td></tr>
+<tr><td>ট / ঠ</td><td>U+099F , U+09A0</td></tr>
+<tr><td>ড / ঢ</td><td>U+09A1 , U+09A2</td></tr>
+<tr><td>ত / থ</td><td>U+09A4 , U+09A5</td></tr>
+<tr><td>দ / ধ</td><td>U+09A6 , U+09A7</td></tr>
+<tr><td>প / ফ</td><td>U+09AA , U+09AB</td></tr>
+<tr><td>ব / ভ</td><td>U+09AC , U+09AD</td></tr>
+</tbody></table>
+<h2>N6_DROP_TARGETS — N6 drop set (12)</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">া</td><td>U+09BE</td><td>BENGALI VOWEL SIGN AA</td></tr>
+<tr><td class="g">ি</td><td>U+09BF</td><td>BENGALI VOWEL SIGN I</td></tr>
+<tr><td class="g">ী</td><td>U+09C0</td><td>BENGALI VOWEL SIGN II</td></tr>
+<tr><td class="g">ু</td><td>U+09C1</td><td>BENGALI VOWEL SIGN U</td></tr>
+<tr><td class="g">ূ</td><td>U+09C2</td><td>BENGALI VOWEL SIGN UU</td></tr>
+<tr><td class="g">ৃ</td><td>U+09C3</td><td>BENGALI VOWEL SIGN VOCALIC R</td></tr>
+<tr><td class="g">ে</td><td>U+09C7</td><td>BENGALI VOWEL SIGN E</td></tr>
+<tr><td class="g">ৈ</td><td>U+09C8</td><td>BENGALI VOWEL SIGN AI</td></tr>
+<tr><td class="g">ো</td><td>U+09CB</td><td>BENGALI VOWEL SIGN O</td></tr>
+<tr><td class="g">ৌ</td><td>U+09CC</td><td>BENGALI VOWEL SIGN AU</td></tr>
+<tr><td class="g">্</td><td>U+09CD</td><td>BENGALI SIGN VIRAMA</td></tr>
+<tr><td class="g">ঁ</td><td>U+0981</td><td>BENGALI SIGN CANDRABINDU</td></tr>
+</tbody></table>
+<h2>N6_ALTER_PAIRS — N6 may alter (else drop-only)</h2>
+<table><thead><tr><th>a</th><th>b</th><th>code points</th></tr></thead><tbody>
+<tr><td>ি</td><td>ী</td><td>U+09BF &lt;-&gt; U+09C0</td></tr>
+<tr><td>ু</td><td>ূ</td><td>U+09C1 &lt;-&gt; U+09C2</td></tr>
+</tbody></table>
+<h2>MATRA_TO_INDEPENDENT_VOWEL — N8 insert_vowel map</h2>
+<table><thead><tr><th>matra</th><th>-&gt; independent vowel</th><th>code points</th></tr></thead><tbody>
+<tr><td>ু</td><td>উ</td><td>U+09C1 -&gt; U+0989</td></tr>
+<tr><td>ূ</td><td>ঊ</td><td>U+09C2 -&gt; U+098A</td></tr>
+<tr><td>ি</td><td>ই</td><td>U+09BF -&gt; U+0987</td></tr>
+<tr><td>ী</td><td>ঈ</td><td>U+09C0 -&gt; U+0988</td></tr>
+<tr><td>ো</td><td>ও</td><td>U+09CB -&gt; U+0993</td></tr>
+</tbody></table>
+<h2>COMMON_CONJUNCTS — N7 fixtures (25)</h2>
+<table><thead><tr><th>glyph</th><th>components</th><th>code points</th></tr></thead><tbody>
+<tr><td class="g">ক্ষ</td><td>ক + ্ + ষ</td><td>U+0995 U+09CD U+09B7</td></tr>
+<tr><td class="g">জ্ঞ</td><td>জ + ্ + ঞ</td><td>U+099C U+09CD U+099E</td></tr>
+<tr><td class="g">ঞ্চ</td><td>ঞ + ্ + চ</td><td>U+099E U+09CD U+099A</td></tr>
+<tr><td class="g">ঞ্জ</td><td>ঞ + ্ + জ</td><td>U+099E U+09CD U+099C</td></tr>
+<tr><td class="g">ণ্ড</td><td>ণ + ্ + ড</td><td>U+09A3 U+09CD U+09A1</td></tr>
+<tr><td class="g">ত্ত</td><td>ত + ্ + ত</td><td>U+09A4 U+09CD U+09A4</td></tr>
+<tr><td class="g">ত্র</td><td>ত + ্ + র</td><td>U+09A4 U+09CD U+09B0</td></tr>
+<tr><td class="g">দ্ধ</td><td>দ + ্ + ধ</td><td>U+09A6 U+09CD U+09A7</td></tr>
+<tr><td class="g">দ্ব</td><td>দ + ্ + ব</td><td>U+09A6 U+09CD U+09AC</td></tr>
+<tr><td class="g">ন্ত</td><td>ন + ্ + ত</td><td>U+09A8 U+09CD U+09A4</td></tr>
+<tr><td class="g">ন্দ</td><td>ন + ্ + দ</td><td>U+09A8 U+09CD U+09A6</td></tr>
+<tr><td class="g">ন্ধ</td><td>ন + ্ + ধ</td><td>U+09A8 U+09CD U+09A7</td></tr>
+<tr><td class="g">প্র</td><td>প + ্ + র</td><td>U+09AA U+09CD U+09B0</td></tr>
+<tr><td class="g">ব্দ</td><td>ব + ্ + দ</td><td>U+09AC U+09CD U+09A6</td></tr>
+<tr><td class="g">স্ত</td><td>স + ্ + ত</td><td>U+09B8 U+09CD U+09A4</td></tr>
+<tr><td class="g">স্থ</td><td>স + ্ + থ</td><td>U+09B8 U+09CD U+09A5</td></tr>
+<tr><td class="g">স্প</td><td>স + ্ + প</td><td>U+09B8 U+09CD U+09AA</td></tr>
+<tr><td class="g">শ্র</td><td>শ + ্ + র</td><td>U+09B6 U+09CD U+09B0</td></tr>
+<tr><td class="g">ষ্ণ</td><td>ষ + ্ + ণ</td><td>U+09B7 U+09CD U+09A3</td></tr>
+<tr><td class="g">ঙ্গ</td><td>ঙ + ্ + গ</td><td>U+0999 U+09CD U+0997</td></tr>
+<tr><td class="g">ক্র</td><td>ক + ্ + র</td><td>U+0995 U+09CD U+09B0</td></tr>
+<tr><td class="g">ক্ত</td><td>ক + ্ + ত</td><td>U+0995 U+09CD U+09A4</td></tr>
+<tr><td class="g">ল্ল</td><td>ল + ্ + ল</td><td>U+09B2 U+09CD U+09B2</td></tr>
+<tr><td class="g">ম্প</td><td>ম + ্ + প</td><td>U+09AE U+09CD U+09AA</td></tr>
+<tr><td class="g">ম্ব</td><td>ম + ্ + ব</td><td>U+09AE U+09CD U+09AC</td></tr>
+</tbody></table>
+<h2>CANDIDATE_CONJUNCTS_TRIPLE — excluded from N7 (3)</h2>
+<table><thead><tr><th>glyph</th><th>code points</th></tr></thead><tbody>
+<tr><td class="g">স্ত্র</td><td>U+09B8 U+09CD U+09A4 U+09CD U+09B0</td></tr>
+<tr><td class="g">ন্ত্র</td><td>U+09A8 U+09CD U+09A4 U+09CD U+09B0</td></tr>
+<tr><td class="g">ক্ষ্ম</td><td>U+0995 U+09CD U+09B7 U+09CD U+09AE</td></tr>
+</tbody></table>
+<h2>EMOJI_CODEPOINT_RANGES — N10 detection</h2>
+<table><thead><tr><th>range</th><th>size</th><th>sample</th></tr></thead><tbody>
+<tr><td>U+1F300–U+1F5FF</td><td>768</td><td>CYCLONE</td></tr>
+<tr><td>U+1F600–U+1F64F</td><td>80</td><td>GRINNING FACE</td></tr>
+<tr><td>U+1F680–U+1F6FF</td><td>128</td><td>ROCKET</td></tr>
+<tr><td>U+1F900–U+1F9FF</td><td>256</td><td>CIRCLED CROSS FORMEE WITH FOUR DOTS</td></tr>
+<tr><td>U+1FA70–U+1FAFF</td><td>144</td><td>BALLET SHOES</td></tr>
+<tr><td>U+2600–U+26FF</td><td>256</td><td>BLACK SUN WITH RAYS</td></tr>
+<tr><td>U+2700–U+27BF</td><td>192</td><td>BLACK SAFETY SCISSORS</td></tr>
+<tr><td>U+1F1E6–U+1F1FF</td><td>26</td><td>REGIONAL INDICATOR SYMBOL LETTER A</td></tr>
+<tr><td>U+1F000–U+1F02F</td><td>48</td><td>MAHJONG TILE EAST WIND</td></tr>
+</tbody></table>
+<h2>EMOJI_SEQUENCE_GLUE — stripped with emoji in &#x27;remove&#x27;</h2>
+<table><thead><tr><th>glyph</th><th>code point(s)</th><th>Unicode name(s)</th></tr></thead><tbody>
+<tr><td class="g">‍</td><td>U+200D</td><td>ZERO WIDTH JOINER</td></tr>
+<tr><td class="g">️</td><td>U+FE0F</td><td>VARIATION SELECTOR-16</td></tr>
+<tr><td class="g">︎</td><td>U+FE0E</td><td>VARIATION SELECTOR-15</td></tr>
+<tr><td class="g">⃣</td><td>U+20E3</td><td>COMBINING ENCLOSING KEYCAP</td></tr>
+</tbody></table>
+<h2>Derived lookups (sizes)</h2>
+<table><thead><tr><th>name</th><th>size</th><th>note</th></tr></thead><tbody>
+<tr><td>CONSONANT_SET</td><td>35</td><td></td></tr>
+<tr><td>INDEPENDENT_VOWEL_SET</td><td>11</td><td></td></tr>
+<tr><td>MATRA_SET</td><td>10</td><td></td></tr>
+<tr><td>DIGIT_SET</td><td>10</td><td></td></tr>
+<tr><td>CHAR_TO_CLASS</td><td>56</td><td>multi-codepoint keys: ড় ঢ় য়</td></tr>
+<tr><td>COMBINING_MARKS</td><td>16</td><td></td></tr>
+</tbody></table>
+</body></html>

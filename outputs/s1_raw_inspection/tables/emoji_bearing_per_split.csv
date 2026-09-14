@@ -1,0 +1,9 @@
+dataset,split_or_file,n_texts,n_emoji_bearing,pct_emoji_bearing
+sentnob,train,12575,212,1.686
+sentnob,val,1567,25,1.595
+sentnob,test,1586,29,1.828
+bd_shs,train,40224,240,0.597
+bd_shs,val,5028,21,0.418
+bd_shs,test,5029,27,0.537
+banfakenews,LabeledAuthentic-7K,7202,2,0.028
+banfakenews,LabeledFake-1K,1299,16,1.232

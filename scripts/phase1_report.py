@@ -63,8 +63,8 @@ SEEDS = (42, 1337, 2024)
 CORPUS_N = 200
 CORPUS_SENTENCES_PER = 3
 
-_DEFAULT_MD = os.path.join(_ROOT, "results", "phase1_report.md")
-_DEFAULT_HTML = os.path.join(_ROOT, "results", "phase1_report.html")
+_DEFAULT_MD = os.path.join(_ROOT, "outputs", "s0_noise_suite", "phase1_report.md")
+_DEFAULT_HTML = os.path.join(_ROOT, "outputs", "s0_noise_suite", "phase1_report.html")
 
 # noise_type -> example sentence (chosen to have many eligible units)
 _EXAMPLE_TEXT: dict[str, str] = {

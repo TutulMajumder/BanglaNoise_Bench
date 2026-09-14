@@ -1,0 +1,4 @@
+dataset,task,n,class_distribution,mean_len,median_len,emoji_rate,dupes_removed,short_removed,non_bangla_removed
+sentnob,sentiment (3-class),14353,"negative=5071, positive=5921, neutral=3361",53.50,43,0.01770,1369,0,6
+bd_shs,hate speech (binary),50127,"not_hate=25999, hate=24128",47.88,29,0.00575,18,133,3
+banfakenews,fake news (binary),8489,"authentic=7194, fake=1295",1107.04,867,0.00212,10,0,2

@@ -1,15 +1,26 @@
-# Data and experiment outputs (added in later phases; never commit these).
-# Use data/* (not data/) so the seeded split manifests can be re-included --
-# git cannot un-exclude a path whose parent directory itself is excluded.
-# NOTE: .gitignore has no inline comments; keep negations on their own line.
+# Data — never commit raw or final corpus TEXT. data/final/<dataset>/
+# manifest.json (ids + stratification seed + source SHA-256, no text -- see
+# pipeline/s2_prepare.py) is the one exception, so the split is reproducible
+# without shipping text. NOTE: .gitignore has no inline comments; keep
+# negations on their own line, and a negated path's parent directories must
+# themselves be un-excluded too -- git will not descend into an excluded
+# directory to find a negated file inside it.
 data/*
-# ...except the prep code and the seeded split manifests, which ARE tracked
-# (METHODOLOGY M2.2). Raw CSVs and data/clean/ stay ignored.
-!data/*.py
 !data/README.md
-!data/splits
+!data/final
+data/final/*/*.csv
+data/final/*/*/*.csv
+
 results/
 results.csv
+
+# .smoke/ mirrors outputs/, data/final/, results/ for --limit (smoke) runs --
+# see pipeline/_common.py::smoke_or_prod. Never tracked; a smoke run must
+# never be able to write a production path.
+.smoke/
+
+# outputs/ is tracked (paper-facing Phase 2 material) -- nothing below
+# excludes it; keep it that way.
 
 # Model artefacts
 *.pt

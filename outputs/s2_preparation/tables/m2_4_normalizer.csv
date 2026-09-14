@@ -1,0 +1,5 @@
+dataset,n_texts,touched,touch_rate,recommend_drop_r6,top_kinds
+sentnob,300,5,0.0167,True,"bengali, len 123->121 (1); punctuation (1); bengali, len 104->103 (1); bengali, len 108->105 (1); bengali, len 49->48 (1)"
+bd_shs,300,5,0.0167,True,"bengali, punctuation (3); bengali, len 256->249 (1); punctuation (1)"
+banfakenews,300,162,0.5400,False,"punctuation (143); punctuation, other, len 3235->3233 (1); punctuation, len 1032->1036 (1); punctuation, whitespace, len 9558->9562 (1); latin (1); punctuation, whitespace, len 4254->4256 (1)"
+ALL,300,55,0.1833,,"punctuation (48); punctuation, other, len 3029->3028 (1); punctuation, len 2409->2415 (1); punctuation, bengali, len 2391->2395 (1); bengali, punctuation (1); other, len 1337->1336 (1)"

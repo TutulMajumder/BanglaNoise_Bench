@@ -1,0 +1,4 @@
+dataset,n_test_texts,n_emoji_bearing,pct_emoji_bearing
+sentnob,1569,29,1.848
+bd_shs,10025,49,0.489
+banfakenews,1698,5,0.294

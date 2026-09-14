@@ -1,0 +1,131 @@
+{
+  "datasets": {
+    "banfakenews": {
+      "class_dist": {
+        "authentic": 7194,
+        "fake": 1295
+      },
+      "leakage_summary": {},
+      "n_final": 8489,
+      "n_raw": 8501,
+      "rows_removed": {
+        "exact_duplicates": 10,
+        "short_lt_3_clusters": 0,
+        "zero_bangla_chars": 2
+      },
+      "source_files": [
+        "banfakenews\\LabeledAuthentic-7K.csv",
+        "banfakenews\\LabeledFake-1K.csv"
+      ],
+      "source_sha256": {
+        "banfakenews\\LabeledAuthentic-7K.csv": "9fc5f573db7f1aa4ea42b200330512f51d18d5402d251eb9c052e1b31e29bd8d",
+        "banfakenews\\LabeledFake-1K.csv": "b7badbb90f042422943a4263f3e0538eddd2126a6da7bb55d17b23f23025be93"
+      },
+      "split_seed": 42,
+      "split_sizes": {
+        "test": 1698,
+        "train": 5942,
+        "val": 849
+      },
+      "split_source": "stratified-70/10/20",
+      "warnings": []
+    },
+    "bd_shs": {
+      "class_dist": {
+        "hate": 24128,
+        "not_hate": 25999
+      },
+      "leakage_summary": {},
+      "n_final": 50127,
+      "n_raw": 50281,
+      "rows_removed": {
+        "exact_duplicates": 18,
+        "short_lt_3_clusters": 133,
+        "zero_bangla_chars": 3
+      },
+      "source_files": [
+        "bd_shs\\train.csv",
+        "bd_shs\\val.csv",
+        "bd_shs\\test.csv"
+      ],
+      "source_sha256": {
+        "bd_shs\\test.csv": "4543a005555ee466a741a4d4d427f1d5b813237366011ef4059700a35115ab5f",
+        "bd_shs\\train.csv": "116c9e9eb7432dff1d50f8cb5cb64a02cf9b8e63caac22fba53d978b1c345ec5",
+        "bd_shs\\val.csv": "67995e80777818a1722b77cd577951f8ffb44d0503b7c659eb7a364b4c165bb4"
+      },
+      "split_seed": 42,
+      "split_sizes": {
+        "test": 10025,
+        "train": 35089,
+        "val": 5013
+      },
+      "split_source": "stratified-70/10/20",
+      "warnings": []
+    },
+    "sentnob": {
+      "class_dist": {
+        "negative": 5071,
+        "neutral": 3361,
+        "positive": 5921
+      },
+      "leakage_summary": {
+        "n_final_text": {
+          "test_in_train": 361,
+          "val_in_test": 54,
+          "val_in_train": 351
+        },
+        "n_raw_text": {
+          "test_in_train": 145,
+          "val_in_test": 16,
+          "val_in_train": 142
+        },
+        "pct_of_split": {
+          "test_in_train": {
+            "final_text_pct": 23.008,
+            "raw_text_pct": 9.242,
+            "split_size": 1569
+          },
+          "val_in_test": {
+            "final_text_pct": 3.468,
+            "raw_text_pct": 1.028,
+            "split_size": 1557
+          },
+          "val_in_train": {
+            "final_text_pct": 22.543,
+            "raw_text_pct": 9.12,
+            "split_size": 1557
+          }
+        }
+      },
+      "n_final": 14353,
+      "n_raw": 15728,
+      "rows_removed": {
+        "exact_duplicates": 1369,
+        "short_lt_3_clusters": 0,
+        "zero_bangla_chars": 6
+      },
+      "source_files": [
+        "sentnob\\train.csv",
+        "sentnob\\val.csv",
+        "sentnob\\test.csv"
+      ],
+      "source_sha256": {
+        "sentnob\\test.csv": "46f6f4c2812ea204d08f0c9e77b0b48a4a3a93aa7905e37f65e45ac259507ed6",
+        "sentnob\\train.csv": "2755f05aaa3198b7d7e00241974362a770a4467267048a3956b18ef95116377e",
+        "sentnob\\val.csv": "0b19347a83d5c56a6cff70561291bbe902b743f4a76d8b02eb625cd6880bb3ca"
+      },
+      "split_seed": null,
+      "split_sizes": {
+        "test": 1569,
+        "train": 11227,
+        "val": 1557
+      },
+      "split_source": "dataset-provided",
+      "warnings": [
+        "1511 rows share cleaned text across provided splits (kept as shipped, not deduplicated across splits)"
+      ]
+    }
+  },
+  "git_rev": "cc728d4159e1b09f79002146af49e5057d6ea51b",
+  "stage": "s2 (M2.1 preprocessing + M2.2 splitting)"
+}

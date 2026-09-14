@@ -1,0 +1,8 @@
+dataset,split_pair,n_identical_texts
+sentnob,test|train,148
+sentnob,test|val,16
+sentnob,train|val,145
+bd_shs,test|train,2
+bd_shs,test|val,0
+bd_shs,train|val,0
+banfakenews,LabeledAuthentic-7K|LabeledFake-1K,0

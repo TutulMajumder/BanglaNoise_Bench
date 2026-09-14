@@ -1,0 +1,4 @@
+dataset,split_source,train,val,test
+sentnob,dataset-provided,11227,1557,1569
+bd_shs,stratified-70/10/20,35089,5013,10025
+banfakenews,stratified-70/10/20,5942,849,1698
