@@ -64,3 +64,50 @@ DATASET_STYLE: dict[str, dict] = {
     "bd_shs": dict(color=ORANGE, ls="-", marker="s"),
     "banfakenews": dict(color=AQUA, ls="--", marker="^"),
 }
+
+# Phase 3 model-emphasis encoding -- Figure_Plan_Evaluation.md Part 0's exact
+# STYLE dict. BanglaBERT (expected to collapse) and char_ngram (expected to
+# hold) are the two accent series in EVERY Phase 3 figure; the other three
+# models are always muted gray context, distinguished only by line
+# style/marker so identity survives greyscale printing (Part 0, Part D
+# checklist). Do not add a new accent colour for a third model -- that is
+# exactly the five-coloured-lines design the palette checker failed.
+STYLE: dict[str, dict] = {
+    "banglabert": dict(color=BLUE, ls="-", marker="o", zorder=5),
+    "char_ngram": dict(color=ORANGE, ls="-", marker="s", zorder=5),
+    "banglishbert": dict(color=GRAY, ls="--", marker="^", zorder=2),
+    "xlmr": dict(color=GRAY, ls="-.", marker="v", zorder=2),
+    "mbert": dict(color=GRAY, ls=":", marker="D", zorder=2),
+}
+
+#: Short display names for compact figure labels/annotations (Figure 3/4's
+#: `LABEL`/`SHORT` maps) -- matches `noisebench.models.MODELS[*].display_name`
+#: but abbreviated further for tight axis/point labels.
+MODEL_SHORT: dict[str, str] = {
+    "banglabert": "BanglaBERT",
+    "char_ngram": "CharSVM",
+    "banglishbert": "BanglishBERT",
+    "xlmr": "XLM-R",
+    "mbert": "mBERT",
+}
+
+#: Task display names for figure titles/panels.
+TASK_LABEL: dict[str, str] = {
+    "sentnob": "SentNoB",
+    "bd_shs": "BD-SHS",
+    "banfakenews": "BanFakeNews",
+}
+
+#: Noise-type display names (N1-N9) for figure titles/legends -- keys match
+#: `noisebench.perturbations.NOISE_TYPES` exactly.
+NOISE_LABEL: dict[str, str] = {
+    "char_insert": "N1 Char insert",
+    "char_delete": "N2 Char delete",
+    "char_substitute": "N3 Char substitute",
+    "char_transpose": "N4 Char transpose",
+    "homophone_confuse": "N5 Homophone confuse",
+    "matra_perturb": "N6 Matra perturb",
+    "conjunct_split": "N7 Conjunct split",
+    "elongate": "N8 Elongation",
+    "whitespace_error": "N9 Whitespace error",
+}

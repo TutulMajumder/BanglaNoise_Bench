@@ -1,0 +1,40 @@
+# Phase 3 (training + evaluation) -- NOT part of the released artefact.
+# Install on top of requirements.txt + requirements-phase2.txt:
+#   pip install -r requirements-phase3.txt
+#
+# torch is deliberately NOT pinned or listed here: Kaggle's GPU notebook
+# image ships a torch build matched to its CUDA driver, and pip-installing a
+# different torch on top of it is the single most common way to break a
+# Kaggle GPU session. Use whatever Kaggle provides; `pipeline/p3_train.py`
+# only needs `torch.cuda.is_available()`, `AdamW`, and `nn.Module` -- nothing
+# version-specific. Confirm the resolved version with `import torch;
+# torch.__version__, torch.cuda.is_available()` at the top of each notebook
+# and record it in PHASE3_STATUS.md's run log.
+
+-r requirements.txt
+-r requirements-phase2.txt
+
+# HF model/tokenizer loading + training loop (AutoModelForSequenceClassification,
+# AutoTokenizer, get_linear_schedule_with_warmup). >=4.40 for stable ELECTRA
+# (BanglaBERT/BanglishBERT) + XLM-R support; local dev pinned no tighter than
+# that (transformers 5.17.0 verified 2026-09-15) since Kaggle's preinstalled
+# version is expected to already satisfy this floor.
+transformers>=4.40
+
+# char_ngram baseline (TfidfVectorizer + LinearSVC) + every metric in
+# compute_metrics (precision_recall_fscore_support, average_precision_score,
+# matthews_corrcoef, balanced_accuracy_score). Kaggle ships >=1.4; any 1.x
+# with these functions is fine.
+scikit-learn>=1.4
+
+# M6.2's McNemar test with Holm correction
+# (statsmodels.stats.contingency_tables.mcnemar,
+# statsmodels.stats.multitest.multipletests) -- used by the not-yet-written
+# significance-testing step in p3_04_analysis.ipynb, not by p3_train.py itself.
+statsmodels>=0.14
+
+# pandas/numpy/matplotlib are already required transitively (requirements.txt
+# -> requirements-phase2.txt for pandas; matplotlib is new here, used only by
+# pipeline/p3_figures.py, never by pipeline/p3_train.py or
+# pipeline/p3_evaluate_noise.py).
+matplotlib>=3.7
