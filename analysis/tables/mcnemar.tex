@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Pre-registered McNemar tests (M6.2): BanglaBERT versus the character $n$-gram baseline on per-item predictions pooled over all nine perturbation types. $b$ and $c$ are the discordant counts (only BanglaBERT correct / only char $n$-gram correct), summed over seeds. $p$ values are Holm-Bonferroni adjusted over the six tests.}
+\label{tab:mcnemar}
+\begin{tabular}{llrrrrl}
+\toprule
+Dataset & Sev. & $b$ & $c$ & OR & $p_{\text{Holm}}$ & Favours \\
+\midrule
+SentNoB & 3 & 3816 & 3496 & 1.09 & $1.91\mathrm{e}-04$ & BanglaBERT \\
+SentNoB & 5 & 4753 & 5381 & 0.88 & $9.42\mathrm{e}-10$ & char $n$-gram \\
+BD-SHS & 3 & 16260 & 12170 & 1.34 & $2.58\mathrm{e}-129$ & BanglaBERT \\
+BD-SHS & 5 & 23611 & 18831 & 1.25 & $1.45\mathrm{e}-118$ & BanglaBERT \\
+BanFakeNews & 3 & 897 & 23349 & 0.04 & $<10^{-300}$ & char $n$-gram \\
+BanFakeNews & 5 & 1117 & 32083 & 0.03 & $<10^{-300}$ & char $n$-gram \\
+\bottomrule
+\end{tabular}
+\end{table}

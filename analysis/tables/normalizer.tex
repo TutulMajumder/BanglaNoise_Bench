@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Effect of Unicode normalization on BanFakeNews under perturbation (R6). $\Delta = \mathrm{F1}_{\text{on}} - \mathrm{F1}_{\text{off}}$, computed per (noise type, severity, seed) cell and aggregated over all $9\times5\times3=135$ cells per model. Normalization is effectively a no-op for every model except mBERT.}
+\label{tab:normalizer}
+\begin{tabular}{lccc}
+\toprule
+Model & mean $\Delta$ & s.d. & max $|\Delta|$ \\
+\midrule
+BanglaBERT & +0.0007 & 0.0047 & 0.0181 \\
+BanglishBERT & +0.0057 & 0.0061 & 0.0254 \\
+char n-gram + SVM & -0.0014 & 0.0025 & 0.0062 \\
+mBERT & \textbf{-0.0059} & \textbf{0.0305} & \textbf{0.1476} \\
+XLM-R & +0.0002 & 0.0019 & 0.0052 \\
+\bottomrule
+\end{tabular}
+\end{table}

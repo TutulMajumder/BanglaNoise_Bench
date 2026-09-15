@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\caption{Clean-test macro-F1 (mean $\pm$ s.d. over three seeds). The character $n$-gram baseline is deterministic, so its s.d.\ is zero by construction rather than by low variance.}
+\label{tab:clean-baseline}
+\begin{tabular}{lccccc}
+\toprule
+Dataset & BanglaBERT & BanglishBERT & char n-gram + SVM & mBERT & XLM-R \\
+\midrule
+SentNoB & 0.703 $\pm$ 0.006 & \textbf{0.706 $\pm$ 0.004} & 0.675 $\pm$ 0.000 & 0.659 $\pm$ 0.016 & 0.673 $\pm$ 0.012 \\
+BD-SHS & \textbf{0.921 $\pm$ 0.005} & 0.917 $\pm$ 0.006 & 0.905 $\pm$ 0.000 & 0.915 $\pm$ 0.001 & 0.915 $\pm$ 0.004 \\
+BanFakeNews & 0.927 $\pm$ 0.003 & 0.919 $\pm$ 0.006 & \textbf{0.947 $\pm$ 0.000} & 0.859 $\pm$ 0.008 & 0.920 $\pm$ 0.008 \\
+\bottomrule
+\end{tabular}
+\end{table}
